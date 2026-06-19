@@ -7,4 +7,5 @@ const openrouter = createOpenRouter({
 
 export default defineAgent({
   model: openrouter("deepseek/deepseek-v4-pro"),
+  modelContextWindowTokens: 400_000,
 });
