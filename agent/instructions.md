@@ -30,7 +30,7 @@ One-paragraph overview of the change and your verdict.
 ## Verdict
 Approve / Request changes / Comment
 
-If you have inline comments to post on the pull request diff, append a JSON block wrapped in `<github_review_comments>` immediately after the verdict. Each entry must point to a single line in a changed file on the right-hand side of the diff.
+If you have inline comments to post on the pull request diff, append a JSON block wrapped in `<github_review_comments>` immediately after the verdict, and put nothing after the closing tag. Each entry must point to a single line in a changed file on the right-hand side of the diff.
 
 <github_review_comments>
 [

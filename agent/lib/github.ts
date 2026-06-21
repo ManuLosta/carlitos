@@ -37,9 +37,41 @@ export function extractInlineComments(
   const after = message.slice(endIdx + REVIEW_COMMENTS_END.length).trim();
   const summary = [before, after].filter(Boolean).join("\n\n");
 
-  const comments = JSON.parse(jsonText) as unknown;
-  if (!Array.isArray(comments)) {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(jsonText);
+  } catch {
     return null;
+  }
+  if (!Array.isArray(parsed)) {
+    return null;
+  }
+
+  const comments: InlineReviewComment[] = [];
+  for (const entry of parsed) {
+    if (
+      entry !== null &&
+      typeof entry === "object" &&
+      typeof (entry as Record<string, unknown>).path === "string" &&
+      typeof (entry as Record<string, unknown>).line === "number" &&
+      typeof (entry as Record<string, unknown>).body === "string"
+    ) {
+      const { path, line, body, side } = entry as Record<string, unknown>;
+      const comment: InlineReviewComment = {
+        path: path as string,
+        line: line as number,
+        body: body as string,
+      };
+      if (side === "LEFT" || side === "RIGHT") {
+        comment.side = side;
+      }
+      comments.push(comment);
+    } else {
+      console.warn(
+        "Dropping malformed inline review comment:",
+        JSON.stringify(entry),
+      );
+    }
   }
 
   return { summary, comments };

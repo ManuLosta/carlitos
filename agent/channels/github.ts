@@ -21,17 +21,11 @@ export default githubChannel({
         return;
       }
 
-      let extracted: ExtractedReviewComments | null;
-      try {
-        extracted = extractInlineComments(message);
-      } catch {
-        // Malformed comment block: fall back to a normal timeline comment.
-        await channel.thread.post(message);
-        return;
-      }
+      const extracted = extractInlineComments(message);
 
       if (!extracted || extracted.comments.length === 0) {
-        await channel.thread.post(extracted?.summary || message);
+        const summary = extracted?.summary;
+        await channel.thread.post(summary && summary.trim() ? summary : message);
         return;
       }
 
