@@ -25,7 +25,12 @@ Use this format:
 One-paragraph overview of the change and your verdict.
 
 ## Findings
-- **Issue**: ... | **Severity**: high/medium/low | **Location**: `file.ts:L12-L15` | **Suggestion**: ...
+
+| Issue | Severity | Location | Suggestion |
+| --- | --- | --- | --- |
+| ... | high/medium/low | `file.ts:L12-L15` | ... |
+
+Write one finding per row. Escape any `|` characters inside cell content as `\|` so the Markdown table renders correctly. If there are no findings, write `No findings.` instead of an empty table.
 
 ## Verdict
 Approve / Request changes / Comment
