@@ -26,25 +26,11 @@ One-paragraph overview of the change and your verdict.
 
 ## Findings
 
-Group findings by severity. Add one `###` subsection per priority that has findings, in this order: `high`, `medium`, `low`. Inside each subsection, list one bullet per changed file, and nest the issue and the suggestion as subbullets:
+| Issue | Severity | Location | Suggestion |
+| --- | --- | --- | --- |
+| ... | high/medium/low | `file.ts:L12-L15` | ... |
 
-### high
-
-- **`file.ts:L12-L15`**
-  - Issue: ...
-  - Suggestion: ...
-
-- **`other.ts:L4`**
-  - Issue: ...
-  - Suggestion: ...
-
-### medium
-
-- **`file.ts:L20`**
-  - Issue: ...
-  - Suggestion: ...
-
-If there are no findings, write `No findings.` instead of any subsections.
+Write one finding per row. Escape any `|` characters inside cell content as `\|` so the Markdown table renders correctly. If there are no findings, write `No findings.` instead of an empty table.
 
 ## Verdict
 Approve / Request changes / Comment
