@@ -83,6 +83,16 @@ export default githubChannel({
   onPullRequest: (ctx, pr) =>
     pr.action === "opened" ? { auth: defaultGitHubAuth(ctx) } : null,
   events: {
+    // Replace the built-in turn.started handler (eyes reaction + repo
+    // checkout). Skipping the checkout avoids eve calling setNetworkPolicy
+    // during checkout, which 402s on the Vercel Hobby plan.
+    async "turn.started"(_event, channel) {
+      try {
+        await channel.thread.react("eyes");
+      } catch {
+        // ignore reaction failures
+      }
+    },
     async "message.completed"(event, channel) {
       const { message, finishReason } = event;
       if (finishReason === "tool-calls" || !message) {
