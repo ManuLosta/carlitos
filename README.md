@@ -1,4 +1,4 @@
-# Carlitos
+# Carlitos - Coding Agent
 
 A simple project repository.
 
